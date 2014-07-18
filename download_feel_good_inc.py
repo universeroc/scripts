@@ -37,11 +37,14 @@ def remote_file_exists(url):
 def download_file(url, file_name):
 	try:
 		h = urllib2.urlopen(url)
-		file = open(file_name, 'wb')
-		file.write(h.read())
-		file.close()
-		print 'finish ' + file_name + '.\n'
-	except urllib2.HTTPError, err:
+		if os.path.exists(file_name):
+			print file_name + ' exists already skip.\n'
+		else:
+			file = open(file_name, 'wb')
+			file.write(h.read())
+			file.close()
+			print 'finish ' + file_name + '.'
+	except:
 		pass
 
 
